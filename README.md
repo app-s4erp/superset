@@ -1,4 +1,4 @@
-]]# Apache Superset - Guia de Instalação Local com Docker
+# Apache Superset - Guia de Instalação Local com Docker
 
 Este guia ajuda a configurar e executar o Apache Superset localmente usando Docker. Este setup é ideal para desenvolvimento e testes, mas não é recomendado para produção.
 

@@ -32,6 +32,15 @@ x-superset-volumes:
   - superset_home:/app/superset_home
 
 services:
+  docker-cli:
+    image: docker:26-cli
+    container_name: docker_cli
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /work
+    command: sh -c "sleep infinity"
+
   redis:
     image: redis:7
     restart: unless-stopped

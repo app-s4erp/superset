@@ -1,0 +1,68 @@
+/* Importação da Fonte (Requer internet no container/cliente) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Reset Global de Fonte */
+body, .ant-layout, .superset-container {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #F5F8FA; /* Off-white background */
+    color: #1B2A3D;
+}
+
+/* --- Títulos --- */
+h1, .header-title {
+    color: #1B2A3D !important;
+    font-weight: 700 !important;
+}
+
+h2, h3, .dashboard-title {
+    color: #1B2A3D !important;
+    font-weight: 600 !important;
+}
+
+/* --- Cards e Containers de Gráficos --- */
+.dashboard-component-chart-holder, 
+.ant-card {
+    background-color: #FFFFFF !important;
+    border: 1px solid #E8EDF2 !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    transition: box-shadow 0.3s ease;
+}
+
+.dashboard-component-chart-holder:hover {
+    box-shadow: 0 4px 12px rgba(27, 42, 61, 0.08) !important;
+}
+
+/* --- Botões --- */
+/* Primário / Ação */
+.ant-btn-primary, button.superset-button-primary {
+    background-color: #10B981 !important; /* Verde Ação */
+    border-color: #10B981 !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    color: #FFFFFF !important;
+}
+
+.ant-btn-primary:hover {
+    background-color: #059669 !important; /* Verde mais escuro */
+}
+
+/* Secundário / Links */
+a {
+    color: #0B7FC2;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #0A6BA0;
+}
+
+/* --- Navbar (Top Menu) --- */
+.navbar {
+    background-color: #FFFFFF !important;
+    border-bottom: 1px solid #E8EDF2 !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #0B7FC2 !important;
+}

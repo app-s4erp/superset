@@ -12,6 +12,9 @@ x-superset-volumes: &superset-volumes
   - superset_home:/app/superset_home
   - ./tests:/app/tests
   - superset_data:/app/data
+  - ./custom_config/superset_config.py:/app/pythonpath/superset_config.py
+  # Se tiver logo:
+  # - ./custom_config/logo.png:/app/superset/static/assets/logo.png
 
 x-common-build: &common-build
   context: .
@@ -59,6 +62,7 @@ services:
         condition: service_completed_successfully
     volumes: *superset-volumes
     environment:
+      SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
       SUPERSET__SQLALCHEMY_EXAMPLES_URI: "duckdb:////app/data/examples.duckdb"
 
   superset-websocket:
@@ -89,6 +93,7 @@ services:
     user: *superset-user
     volumes: *superset-volumes
     environment:
+      SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
       SUPERSET__SQLALCHEMY_EXAMPLES_URI: "duckdb:////app/data/examples.duckdb"
     healthcheck:
       disable: true
@@ -117,6 +122,7 @@ services:
     env_file: docker/.env
     environment:
       CELERYD_CONCURRENCY: 2
+      SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
     restart: unless-stopped
     depends_on:
       superset-init:
@@ -136,8 +142,8 @@ services:
       - superset-worker
     user: *superset-user
     volumes: *superset-volumes
-    healthcheck:
-      disable: true
+    environment:
+      SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
 
 volumes:
   superset_home:

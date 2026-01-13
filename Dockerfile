@@ -1,19 +1,17 @@
-#
 # Licensed to the Apache Software Foundation (ASF) under one or more
-# contributor license agreements.  See the NOTICE file distributed with
+# contributor license agreements. See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
 # The ASF licenses this file to You under the Apache License, Version 2.0
 # (the "License"); you may not use this file except in compliance with
-# the License.  You may obtain a copy of the License at
+# the License. You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 ######################################################################
 # Node stage to deal with static asset construction
@@ -33,12 +31,16 @@ ARG LOAD_EXAMPLES_DUCKDB="false"
 # superset-node-ci used as a base for building frontend assets and CI
 ######################################################################
 FROM --platform=${BUILDPLATFORM} node:20-trixie-slim AS superset-node-ci
+
 ARG BUILD_TRANSLATIONS
 ENV BUILD_TRANSLATIONS=${BUILD_TRANSLATIONS}
-ARG DEV_MODE="false"           # Skip frontend build in dev mode
+
+ARG DEV_MODE="false"
+# Skip frontend build in dev mode
 ENV DEV_MODE=${DEV_MODE}
 
 COPY docker/ /app/docker/
+
 # Arguments for build configuration
 ARG NPM_BUILD_CMD="build"
 
@@ -99,7 +101,6 @@ RUN if [ "${BUILD_TRANSLATIONS}" = "true" ]; then \
     fi; \
     rm -rf /app/superset/translations/*/*/*.[po,mo];
 
-
 ######################################################################
 # Base python layer
 ######################################################################
@@ -136,6 +137,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     . /app/.venv/bin/activate && /app/docker/pip-install.sh --requires-build-essential -r requirements/translations.txt
 
 COPY superset/translations/ /app/translations_mo/
+
 RUN if [ "${BUILD_TRANSLATIONS}" = "true" ]; then \
         pybabel compile -d /app/translations_mo | true; \
     fi; \
@@ -160,14 +162,15 @@ ENV SUPERSET_HOME="/app/superset_home" \
 COPY --chmod=755 docker/entrypoints /app/docker/entrypoints
 
 WORKDIR /app
+
 # Set up necessary directories and user
 RUN mkdir -p \
-      ${PYTHONPATH} \
-      superset/static \
-      requirements \
-      superset-frontend \
-      apache_superset.egg-info \
-      requirements \
+        ${PYTHONPATH} \
+        superset/static \
+        requirements \
+        superset-frontend \
+        apache_superset.egg-info \
+        requirements \
     && touch superset/static/version_info.json
 
 # Install Playwright and optionally setup headless browsers
@@ -175,6 +178,7 @@ ENV PLAYWRIGHT_BROWSERS_PATH=/usr/local/share/playwright-browsers
 
 ARG INCLUDE_CHROMIUM="false"
 ARG INCLUDE_FIREFOX="false"
+
 RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
     if [ "${INCLUDE_CHROMIUM}" = "true" ] || [ "${INCLUDE_FIREFOX}" = "true" ]; then \
         uv pip install playwright && \
@@ -195,12 +199,12 @@ COPY --chmod=755 ./docker/entrypoints/run-server.sh /usr/bin/
 
 # Some debian libs
 RUN /app/docker/apt-install.sh \
-      curl \
-      libsasl2-dev \
-      libsasl2-modules-gssapi-mit \
-      libpq-dev \
-      libecpg-dev \
-      libldap2-dev
+    curl \
+    libsasl2-dev \
+    libsasl2-modules-gssapi-mit \
+    libpq-dev \
+    libecpg-dev \
+    libldap2-dev
 
 # Pre-load examples DuckDB file if requested
 RUN if [ "$LOAD_EXAMPLES_DUCKDB" = "true" ]; then \
@@ -243,9 +247,15 @@ COPY superset-core superset-core
 
 RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
     /app/docker/pip-install.sh --requires-build-essential -r requirements/base.txt
+
 # Install the superset package
 RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
     uv pip install -e .
+
+# Install psycopg2-binary for PostgreSQL support
+RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
+    uv pip install psycopg2-binary
+
 RUN python -m compileall /app/superset
 
 USER superset
@@ -271,11 +281,17 @@ COPY superset-extensions-cli superset-extensions-cli
 # Install Python dependencies using docker/pip-install.sh
 RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
     /app/docker/pip-install.sh --requires-build-essential -r requirements/development.txt
+
 # Install the superset package
 RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
     uv pip install -e .
 
 RUN uv pip install .[postgres]
+
+# Install psycopg2-binary for PostgreSQL support
+RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
+    uv pip install psycopg2-binary
+
 RUN python -m compileall /app/superset
 
 USER superset
@@ -284,16 +300,32 @@ USER superset
 # CI image...
 ######################################################################
 FROM lean AS ci
+
 USER root
+
 RUN uv pip install .[postgres,duckdb]
+
+# Install psycopg2-binary for PostgreSQL support
+RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
+    uv pip install psycopg2-binary
+
 USER superset
+
 CMD ["/app/docker/entrypoints/docker-ci.sh"]
 
 ######################################################################
 # Showtime image - lean + DuckDB for examples database
 ######################################################################
 FROM lean AS showtime
+
 USER root
+
 RUN uv pip install .[duckdb]
+
+# Install psycopg2-binary for PostgreSQL support
+RUN --mount=type=cache,target=${SUPERSET_HOME}/.cache/uv \
+    uv pip install psycopg2-binary
+
 USER superset
+
 CMD ["/app/docker/entrypoints/docker-ci.sh"]

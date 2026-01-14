@@ -63,6 +63,7 @@ services:
     volumes: *superset-volumes
     environment:
       SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
+      PYTHONPATH: /app/pythonpath
       SUPERSET__SQLALCHEMY_EXAMPLES_URI: "duckdb:////app/data/examples.duckdb"
 
   superset-websocket:
@@ -94,6 +95,7 @@ services:
     volumes: *superset-volumes
     environment:
       SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
+      PYTHONPATH: /app/pythonpath
       SUPERSET__SQLALCHEMY_EXAMPLES_URI: "duckdb:////app/data/examples.duckdb"
     healthcheck:
       disable: true
@@ -123,6 +125,7 @@ services:
     environment:
       CELERYD_CONCURRENCY: 2
       SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
+      PYTHONPATH: /app/pythonpath
     restart: unless-stopped
     depends_on:
       superset-init:
@@ -144,7 +147,7 @@ services:
     volumes: *superset-volumes
     environment:
       SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
-
+      PYTHONPATH: /app/pythonpath
 volumes:
   superset_home:
     external: false

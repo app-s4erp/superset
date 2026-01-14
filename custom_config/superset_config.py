@@ -1,4 +1,5 @@
 import os
+from flask import g
 
 # ---------------------------------------------------------
 # 1. Configurações Básicas da Aplicação
@@ -119,3 +120,48 @@ CORS_OPTIONS = {
 # Configuração de segurança obrigatória para Embedding (2026)
 GUEST_ROLE_NAME = "Gamma"  # Papel base para usuários externos
 GUEST_TOKEN_JWT_EXP_SECONDS = 3600  # 1 hora
+
+# ---------------------------------------------------------
+# 6. Row Level Security (RLS) - Custom Jinja Functions
+# ---------------------------------------------------------
+def current_user_email():
+    """
+    Retorna o email do usuário atualmente logado no Superset.
+    Pode ser usado em regras RLS, por exemplo:
+    "idEmpresa" IN (SELECT "idEmpresa" FROM usuarios WHERE email = '{{ current_user_email() }}')
+    """
+    try:
+        if g.user and g.user.email:
+            return g.user.email
+        return ""
+    except Exception:
+        return ""
+
+def current_user_id():
+    """
+    Retorna o ID do usuário atualmente logado.
+    """
+    try:
+        if g.user and g.user.id:
+            return g.user.id
+        return None
+    except Exception:
+        return None
+
+def current_username():
+    """
+    Retorna o username do usuário atualmente logado.
+    """
+    try:
+        if g.user and g.user.username:
+            return g.user.username
+        return ""
+    except Exception:
+        return ""
+
+# Registra as funções customizadas para uso em templates Jinja
+JINJA_CONTEXT_ADDONS = {
+    "current_user_email": current_user_email,
+    "current_user_id": current_user_id,
+    "current_username": current_username,
+}

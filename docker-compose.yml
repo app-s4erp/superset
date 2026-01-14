@@ -12,7 +12,7 @@ x-superset-volumes: &superset-volumes
   - superset_home:/app/superset_home
   - ./tests:/app/tests
   - superset_data:/app/data
-  - ./custom_config/superset_config.py:/app/pythonpath/superset_config.py
+  - ./superset/custom_config/superset_config.py:/app/pythonpath/superset_config.py
   # Se tiver logo:
   # - ./custom_config/logo.png:/app/superset/static/assets/logo.png
 

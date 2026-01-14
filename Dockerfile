@@ -230,6 +230,10 @@ RUN rm superset/translations/*/*/*.po
 COPY --from=superset-node /app/superset/translations superset/translations
 COPY --from=python-translation-compiler /app/translations_mo superset/translations
 
+# Copy custom configuration and assets
+COPY custom_config/superset_config.py /app/pythonpath/superset_config.py
+COPY custom_config/custom.css superset/static/assets/custom.css
+
 HEALTHCHECK CMD /app/docker/docker-healthcheck.sh
 CMD ["/app/docker/entrypoints/run-server.sh"]
 EXPOSE ${SUPERSET_PORT}

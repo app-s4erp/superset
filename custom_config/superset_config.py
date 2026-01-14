@@ -13,6 +13,17 @@ ROW_LIMIT = 5000
 SECRET_KEY = os.getenv("SUPERSET_SECRET_KEY", "MUDE_ESTA_CHAVE_EM_PROD")
 
 # ---------------------------------------------------------
+# Configuração do Banco de Dados (Metadados do Superset)
+# ---------------------------------------------------------
+# Use variáveis de ambiente para configurar um banco externo
+# Exemplo PostgreSQL: postgresql://user:password@host:5432/superset
+# Exemplo MySQL: mysql://user:password@host:3306/superset
+SQLALCHEMY_DATABASE_URI = os.getenv(
+    "SUPERSET_DATABASE_URI",
+    "sqlite:////app/superset_home/superset.db"  # Fallback para SQLite local
+)
+
+# ---------------------------------------------------------
 # 2. Design System & Theme Overrides (Sem Rebuild)
 # ---------------------------------------------------------
 THEME_OVERRIDES = {

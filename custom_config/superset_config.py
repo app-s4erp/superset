@@ -5,7 +5,7 @@ import os
 # ---------------------------------------------------------
 APP_NAME = "S4 ERP Analytics"
 # APP_ICON = "/static/assets/logo.png"  # Descomentar quando tiver a logo
-# FAVICONS = [{"href": "/static/assets/favicon.png"}] 
+# FAVICONS = [{"href": "/static/assets/favicon.png"}]
 
 # Desabilitar funcionalidades que não são "Enterprise Grade" ou necessárias
 ENABLE_PROXY_FIX = True
@@ -24,22 +24,22 @@ THEME_OVERRIDES = {
     "colors": {
         "primary": {
             "base": "#0B7FC2",  # Azul Principal
-            "dark1": "#0A6BA0", # Azul Hover
+            "dark1": "#0A6BA0",  # Azul Hover
             "light1": "#E8EDF2",
             "light2": "#F5F8FA",
         },
         "grayscale": {
-            "dark1": "#1B2A3D", # Azul Corporativo (Texto forte)
+            "dark1": "#1B2A3D",  # Azul Corporativo (Texto forte)
             "base": "#64748B",  # Cinza neutro
-            "light1": "#E8EDF2", # Bordas
-            "light2": "#F5F8FA", # Fundos off-white
-            "light5": "#FFFFFF", # Branco puro
+            "light1": "#E8EDF2",  # Bordas
+            "light2": "#F5F8FA",  # Fundos off-white
+            "light5": "#FFFFFF",  # Branco puro
         },
         "error": {
             "base": "#E04F5F",
         },
         "success": {
-            "base": "#10B981", # Verde Ação
+            "base": "#10B981",  # Verde Ação
         },
         "info": {
             "base": "#0B7FC2",
@@ -69,12 +69,12 @@ EXTRA_CATEGORICAL_COLOR_SCHEMES = [
         "id": "corporate_palette",
         "description": "Paleta Corporativa Oficial",
         "colors": [
-            "#0B7FC2", # Azul Principal
-            "#1B2A3D", # Azul Escuro
-            "#10B981", # Verde Ação
-            "#64748B", # Cinza Neutro
-            "#F59E0B", # Âmbar (Complementar sugerida)
-            "#8B5CF6", # Roxo (Complementar sugerida)
+            "#0B7FC2",  # Azul Principal
+            "#1B2A3D",  # Azul Escuro
+            "#10B981",  # Verde Ação
+            "#64748B",  # Cinza Neutro
+            "#F59E0B",  # Âmbar (Complementar sugerida)
+            "#8B5CF6",  # Roxo (Complementar sugerida)
         ]
     }
 ]
@@ -85,3 +85,26 @@ EXTRA_CATEGORICAL_COLOR_SCHEMES = [
 # Como não estamos fazendo rebuild, precisamos injetar o CSS via configuração de dashboard
 # ou template. Essa flag habilita o uso de CSS Templates no UI.
 ENABLE_TEMPLATE_PROCESSING = True
+
+# ---------------------------------------------------------
+# 5. Feature Flags & Embedding Configuration
+# ---------------------------------------------------------
+# Habilita o uso de Jinja nas queries e RLS
+FEATURE_FLAGS = {
+    "ENABLE_TEMPLATE_PROCESSING": True,
+    "EMBEDDED_SUPERSET": True
+}
+
+# Permite que o dashboard seja exibido dentro de um iframe do ERP
+HTTP_HEADERS = {'X-Frame-Options': 'ALLOWALL'}
+
+ENABLE_CORS = True
+CORS_OPTIONS = {
+    'supports_credentials': True,
+    'allow_headers': ['*'],
+    'origins': ['https://app.s4erp.com/']  # URL do ERP
+}
+
+# Configuração de segurança obrigatória para Embedding (2026)
+GUEST_ROLE_NAME = "Gamma"  # Papel base para usuários externos
+GUEST_TOKEN_JWT_EXP_SECONDS = 3600  # 1 hora

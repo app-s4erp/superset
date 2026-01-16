@@ -58,8 +58,8 @@ WORKDIR /app/superset-frontend
 
 # Create necessary folders to avoid errors in subsequent steps
 RUN mkdir -p /app/superset/static/assets \
-             /app/superset/translations
-
+             /app/superset/translations \
+             /app/superset/templates/appbuilder
 # Mount package files and install dependencies if not in dev mode
 # NOTE: we mount packages and plugins as they are referenced in package.json as workspaces
 # ideally we'd COPY only their package.json. Here npm ci will be cached as long
@@ -167,6 +167,8 @@ WORKDIR /app
 RUN mkdir -p \
         ${PYTHONPATH} \
         superset/static \
+        superset/static/assets \
+        superset/templates/appbuilder \
         requirements \
         superset-frontend \
         apache_superset.egg-info \
@@ -233,6 +235,15 @@ COPY --from=python-translation-compiler /app/translations_mo superset/translatio
 # Copy custom configuration and assets
 COPY custom_config/superset_config.py /app/pythonpath/superset_config.py
 COPY custom_config/custom.css superset/static/assets/custom.css
+COPY custom_config/baselayout.html superset/templates/appbuilder/baselayout.html
+
+# Ensure proper permissions for custom files
+RUN chmod 644 /app/pythonpath/superset_config.py && \
+    chmod 644 superset/static/assets/custom.css && \
+    chmod 644 superset/templates/appbuilder/baselayout.html && \
+    chown -R superset:superset /app/pythonpath && \
+    chown -R superset:superset superset/static/assets && \
+    chown -R superset:superset superset/templates
 
 HEALTHCHECK CMD /app/docker/docker-healthcheck.sh
 CMD ["/app/docker/entrypoints/run-server.sh"]

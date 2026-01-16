@@ -1,5 +1,6 @@
 import os
 from flask import g
+from flask_talisman import Talisman
 
 APP_NAME = "S4 ERP Analytics"
 ENABLE_PROXY_FIX = True
@@ -21,7 +22,7 @@ FEATURE_FLAGS = {
     "DASHBOARD_RBAC": True,
 }
 
-GUEST_ROLE_NAME = "Admin"
+GUEST_ROLE_NAME = "Gamma"
 GUEST_TOKEN_JWT_SECRET = os.getenv("GUEST_TOKEN_JWT_SECRET", "MUDE_ESTA_CHAVE_EM_PROD")
 GUEST_TOKEN_JWT_ALGO = "HS256"
 GUEST_TOKEN_JWT_EXP_SECONDS = 3600
@@ -53,6 +54,17 @@ CONTENT_SECURITY_POLICY = {
     ],
 }
 
+TALISMAN_ENABLED = True
+TALISMAN_CONFIG = {
+    "content_security_policy": {
+        "frame-ancestors": [
+            "http://localhost:8080",
+            "https://app.s4erp.com",
+        ],
+    },
+    "force_https": False,
+}
+
 def current_user_email():
     try:
         if g.user and g.user.email:
@@ -77,8 +89,18 @@ def current_username():
     except Exception:
         return ""
 
+def current_user_extra(key):
+    """Acessa campos extras do guest token para RLS"""
+    try:
+        if g.user and hasattr(g.user, 'extra') and isinstance(g.user.extra, dict):
+            return g.user.extra.get(key, None)
+        return None
+    except Exception:
+        return None
+
 JINJA_CONTEXT_ADDONS = {
     "current_user_email": current_user_email,
     "current_user_id": current_user_id,
     "current_username": current_username,
+    "current_user_extra": current_user_extra,
 }

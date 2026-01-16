@@ -13,9 +13,7 @@ x-superset-volumes: &superset-volumes
   - ./tests:/app/tests
   - superset_data:/app/data
   - ./custom_config/superset_config.py:/app/pythonpath/superset_config.py
-  - ./custom_config/custom.css:/app/superset/static/assets/custom.css
-  # Se tiver logo:
-  # - ./custom_config/logo.png:/app/superset/static/assets/logo.png
+  - ./custom_config/baselayout.html:/app/superset/templates/appbuilder/baselayout.html
 
 x-common-build: &common-build
   context: .
@@ -98,6 +96,11 @@ services:
       SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
       PYTHONPATH: /app/pythonpath
       SUPERSET__SQLALCHEMY_EXAMPLES_URI: "duckdb:////app/data/examples.duckdb"
+      SUPERSET_ADMIN_USERNAME: "s4erpadmin"
+      SUPERSET_ADMIN_PASSWORD: "s43rp4dm1n"
+      SUPERSET_ADMIN_FIRSTNAME: "S4"
+      SUPERSET_ADMIN_LASTNAME: "Admin"
+      SUPERSET_ADMIN_EMAIL: "admin@s4erp.com"
     healthcheck:
       disable: true
 

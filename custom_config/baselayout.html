@@ -1,0 +1,249 @@
+{% extends "appbuilder/init.html" %}
+
+{% block head_meta %}
+  {{ super() }}
+  <meta name="theme-color" content="#0B7FC2">
+{% endblock %}
+
+{% block head_css %}
+  {{ super() }}
+  
+  <!-- Google Fonts - Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>  
+    /* Fonte Global */
+    * {
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    }
+    
+    /* Background Global */
+    body,
+    #app,
+    .ant-layout,
+    .dashboard,
+    .dashboard-content,
+    .main-container {
+        background-color: #F5F8FA !important;
+        color: #1B2A3D !important;
+    }
+    
+    /* Header/Navbar Superior */
+    .header,
+    .navbar,
+    .ant-layout-header,
+    .dashboard-header,
+    .top-nav {
+        background-color: #FFFFFF !important;
+        border-bottom: 1px solid #E2E8F0 !important;
+        box-shadow: 0 1px 3px rgba(27, 42, 61, 0.04) !important;
+    }
+    
+    /* Logo e Brand */
+    .navbar-brand {
+        color: #0B7FC2 !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar/Menu Lateral */
+    .ant-layout-sider,
+    .ant-menu,
+    .menu,
+    aside {
+        background-color: #FFFFFF !important;
+        border-right: 1px solid #E2E8F0 !important;
+    }
+    
+    .ant-menu-item,
+    .ant-menu-submenu-title {
+        color: #64748B !important;
+        border-radius: 8px !important;
+        margin: 4px 8px !important;
+    }
+    
+    .ant-menu-item-selected,
+    .ant-menu-item-active,
+    .ant-menu-item:hover {
+        background-color: #E8F4FB !important;
+        color: #0B7FC2 !important;
+    }
+    
+    /* Títulos */
+    h1, h2, h3, h4, h5, h6,
+    .header-title,
+    .dashboard-title,
+    .panel-title,
+    .modal-title,
+    .ant-modal-title {
+        color: #1B2A3D !important;
+        font-weight: 600 !important;
+    }
+    
+    h1 { font-size: 2rem !important; font-weight: 700 !important; }
+    h2 { font-size: 1.5rem !important; }
+    h3 { font-size: 1.25rem !important; }
+    
+    /* Cards e Gráficos */
+    .dashboard-component-chart-holder,
+    .chart-container,
+    .slice_container,
+    .ant-card,
+    .panel {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 1px 3px rgba(27, 42, 61, 0.04) !important;
+        transition: all 0.3s ease;
+    }
+    
+    .dashboard-component-chart-holder:hover,
+    .chart-container:hover,
+    .ant-card:hover {
+        box-shadow: 0 4px 12px rgba(27, 42, 61, 0.08) !important;
+        transform: translateY(-2px);
+    }
+    
+    /* Botões Primários */
+    .ant-btn-primary,
+    .btn-primary,
+    button[type="submit"] {
+        background-color: #0B7FC2 !important;
+        border-color: #0B7FC2 !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        box-shadow: 0 1px 2px rgba(11, 127, 194, 0.2) !important;
+    }
+    
+    .ant-btn-primary:hover,
+    .btn-primary:hover {
+        background-color: #0A6BA0 !important;
+        border-color: #0A6BA0 !important;
+        transform: translateY(-1px);
+    }
+    
+    /* Botões Secundários */
+    .ant-btn-default,
+    .btn-default {
+        border-color: #E2E8F0 !important;
+        border-radius: 8px !important;
+    }
+    
+    .ant-btn-default:hover {
+        border-color: #0B7FC2 !important;
+        color: #0B7FC2 !important;
+    }
+    
+    /* Botões Sucesso */
+    .ant-btn-success,
+    .btn-success {
+        background-color: #10B981 !important;
+        border-color: #10B981 !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Links */
+    a {
+        color: #0B7FC2 !important;
+        transition: color 0.2s;
+    }
+    
+    a:hover {
+        color: #0A6BA0 !important;
+    }
+    
+    /* Tabs */
+    .ant-tabs-tab {
+        font-weight: 500 !important;
+        color: #64748B !important;
+    }
+    
+    .ant-tabs-tab-active {
+        color: #0B7FC2 !important;
+        font-weight: 600 !important;
+    }
+    
+    .ant-tabs-ink-bar {
+        background-color: #0B7FC2 !important;
+        height: 3px !important;
+    }
+    
+    /* Inputs e Forms */
+    .ant-input,
+    .ant-select-selector,
+    .ant-picker,
+    input,
+    textarea,
+    select {
+        border-radius: 8px !important;
+        border-color: #E2E8F0 !important;
+    }
+    
+    .ant-input:focus,
+    .ant-select-focused .ant-select-selector,
+    input:focus {
+        border-color: #0B7FC2 !important;
+        box-shadow: 0 0 0 2px rgba(11, 127, 194, 0.1) !important;
+    }
+    
+    /* Modals */
+    .ant-modal-content {
+        border-radius: 12px !important;
+    }
+    
+    .ant-modal-header {
+        border-bottom: 1px solid #E2E8F0 !important;
+        background-color: #F8FAFC !important;
+    }
+    
+    /* Tables */
+    .ant-table-thead > tr > th {
+        background-color: #F8FAFC !important;
+        color: #1B2A3D !important;
+        font-weight: 600 !important;
+        border-bottom: 2px solid #E2E8F0 !important;
+    }
+    
+    .ant-table-tbody > tr:hover {
+        background-color: #F8FAFC !important;
+    }
+    
+    /* Tags */
+    .ant-tag {
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Tooltips */
+    .ant-tooltip-inner {
+        background-color: #1B2A3D !important;
+        border-radius: 6px !important;
+    }
+    
+    /* Loading */
+    .ant-spin-dot-item {
+        background-color: #0B7FC2 !important;
+    }
+    
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #F1F5F9;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #CBD5E1;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94A3B8;
+    }
+  </style>
+{% endblock %}

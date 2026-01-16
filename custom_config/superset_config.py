@@ -428,15 +428,20 @@ FEATURE_FLAGS = {
 
 HTTP_HEADERS = {'X-Frame-Options': 'ALLOWALL'}
 
+FAB_ADD_SECURITY_API = True
+GUEST_TOKEN_JWT_SECRET = "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+GUEST_TOKEN_JWT_ALGO = "HS256"
+GUEST_TOKEN_JWT_EXP_SECONDS = 3600
+
 ENABLE_CORS = True
 CORS_OPTIONS = {
     'supports_credentials': True,
     'allow_headers': ['*'],
-    'origins': ['https://app.s4erp.com/']
+    'resources': ['*'],
+    'origins': ['https://app.s4erp.com']
 }
 
 GUEST_ROLE_NAME = "Gamma"
-GUEST_TOKEN_JWT_EXP_SECONDS = 3600
 
 def current_user_email():
     try:

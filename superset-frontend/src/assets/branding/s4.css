@@ -1,0 +1,232 @@
+/* =========================
+   S4 Skin - base
+========================= */
+:root{
+  --s4-bg: #F5F8FA;
+  --s4-surface: #FFFFFF;
+  --s4-border: #E2E8F0;
+  --s4-text: #1B2A3D;
+  --s4-muted: #64748B;
+
+  --s4-primary: #0B7FC2;
+  --s4-primary-700: #0A6BA0;
+  --s4-success: #10B981;
+
+  --s4-radius: 12px;
+  --s4-radius-sm: 8px;
+
+  --s4-shadow: 0 1px 3px rgba(27, 42, 61, 0.04);
+  --s4-shadow-hover: 0 4px 12px rgba(27, 42, 61, 0.08);
+}
+
+* {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+body, #app {
+  background: var(--s4-bg) !important;
+  color: var(--s4-text) !important;
+}
+
+/* =========================
+   Header (topo)
+========================= */
+.navbar,
+.ant-layout-header,
+.top-nav,
+.header {
+  background: var(--s4-surface) !important;
+  border-bottom: 1px solid var(--s4-border) !important;
+  box-shadow: var(--s4-shadow) !important;
+}
+
+/* Deixa o brand “só ícone”, alinhado e com tamanho consistente */
+.navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.navbar-brand img,
+.navbar-brand svg {
+  height: 26px !important;
+  width: auto !important;
+}
+
+/* Barra de busca mais “clean” */
+input[type="search"],
+.ant-input,
+.ant-input-affix-wrapper {
+  border-radius: 999px !important;
+  border-color: var(--s4-border) !important;
+}
+.ant-input:focus,
+.ant-input-affix-wrapper-focused {
+  border-color: var(--s4-primary) !important;
+  box-shadow: 0 0 0 2px rgba(11,127,194,0.12) !important;
+}
+
+/* =========================
+   Sidebar (menu esquerdo)
+========================= */
+.ant-layout-sider,
+.ant-menu,
+.Menu,
+aside {
+  background: var(--s4-surface) !important;
+  border-right: 1px solid var(--s4-border) !important;
+}
+
+/* Itens mais “espaçados” e arredondados */
+.ant-menu-item,
+.ant-menu-submenu-title {
+  color: var(--s4-muted) !important;
+  border-radius: 10px !important;
+  margin: 4px 10px !important;
+}
+
+/* Selecionado/hover como no print */
+.ant-menu-item-selected,
+.ant-menu-item-active,
+.ant-menu-item:hover {
+  background: #E8F4FB !important;
+  color: var(--s4-primary) !important;
+}
+.ant-menu-item-selected::after {
+  border-right-color: var(--s4-primary) !important;
+}
+
+/* =========================
+   Tipografia (títulos)
+========================= */
+h1,h2,h3,h4,h5,h6,
+.ant-typography-title,
+.dashboard-title,
+.header-title,
+.panel-title {
+  color: var(--s4-text) !important;
+  font-weight: 600 !important;
+}
+
+h1 { font-size: 2rem !important; font-weight: 700 !important; }
+h2 { font-size: 1.5rem !important; }
+h3 { font-size: 1.25rem !important; }
+
+/* =========================
+   Cards / containers
+========================= */
+.ant-card,
+.panel,
+.widget,
+.dashboard-component-chart-holder,
+.chart-container,
+.slice_container {
+  background: var(--s4-surface) !important;
+  border: 1px solid var(--s4-border) !important;
+  border-radius: var(--s4-radius) !important;
+  box-shadow: var(--s4-shadow) !important;
+  transition: box-shadow .25s ease, transform .2s ease;
+}
+
+.ant-card:hover,
+.dashboard-component-chart-holder:hover,
+.chart-container:hover {
+  box-shadow: var(--s4-shadow-hover) !important;
+  transform: translateY(-2px);
+}
+
+/* Área do dashboard com “respiro” */
+.dashboard-grid,
+.grid-container {
+  background: var(--s4-bg) !important;
+  padding: 16px !important;
+}
+
+/* =========================
+   Botões (principal)
+========================= */
+.ant-btn-primary,
+.btn-primary,
+.superset-button-primary,
+button[type="submit"]{
+  background: var(--s4-primary) !important;
+  border-color: var(--s4-primary) !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 2px rgba(11,127,194,0.2) !important;
+}
+
+.ant-btn-primary:hover,
+.btn-primary:hover {
+  background: var(--s4-primary-700) !important;
+  border-color: var(--s4-primary-700) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(11,127,194,0.3) !important;
+}
+
+.ant-btn-default,
+.btn-default{
+  border-color: var(--s4-border) !important;
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+}
+
+.ant-btn-default:hover {
+  border-color: var(--s4-primary) !important;
+  color: var(--s4-primary) !important;
+}
+
+/* Links */
+a { color: var(--s4-primary) !important; }
+a:hover { color: var(--s4-primary-700) !important; text-decoration: none !important; }
+
+/* =========================
+   Inputs / selects / datepicker
+========================= */
+.ant-input,
+.ant-select-selector,
+.ant-picker,
+textarea,
+select {
+  border-radius: 10px !important;
+  border-color: var(--s4-border) !important;
+}
+.ant-select-focused .ant-select-selector,
+.ant-picker-focused,
+.ant-input:focus,
+textarea:focus {
+  border-color: var(--s4-primary) !important;
+  box-shadow: 0 0 0 2px rgba(11,127,194,0.12) !important;
+}
+
+/* =========================
+   Tabelas
+========================= */
+.ant-table,
+.table,
+.dataTable {
+  border-radius: var(--s4-radius-sm) !important;
+  overflow: hidden;
+}
+
+.ant-table-thead > tr > th {
+  background: #F8FAFC !important;
+  color: var(--s4-text) !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid var(--s4-border) !important;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.ant-table-tbody > tr:hover {
+  background: #F8FAFC !important;
+}
+
+/* =========================
+   Scrollbar (igual clean UI)
+========================= */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }

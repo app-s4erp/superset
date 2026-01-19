@@ -1,0 +1,227 @@
+
+{
+    "name": "S4 Force Light (No Dark) v2 - Fixed Selection",
+    "token": {
+      "fontFamily": "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "fontFamilyCode": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+  
+      "colorPrimary": "#556ee6",
+      "colorInfo": "#556ee6",
+      "colorSuccess": "#34c38f",
+      "colorWarning": "#f1b44c",
+      "colorError": "#f46a6a",
+  
+      "colorText": "#343a40",
+      "colorTextSecondary": "#6c757d",
+      "colorTextTertiary": "#95a5a6",
+      "colorTextQuaternary": "#cbd3da",
+  
+      "colorBgBase": "#f8f8fb",
+      "colorBgLayout": "#f8f8fb",
+      "colorBgContainer": "#ffffff",
+      "colorBgElevated": "#ffffff",
+      "colorBgSpotlight": "#ffffff",
+  
+      "colorBorder": "#e9ecef",
+      "colorBorderSecondary": "#e9ecef",
+  
+      "colorFill": "rgba(52, 58, 64, 0.06)",
+      "colorFillSecondary": "rgba(52, 58, 64, 0.04)",
+      "colorFillTertiary": "rgba(52, 58, 64, 0.03)",
+      "colorFillQuaternary": "rgba(52, 58, 64, 0.02)",
+  
+      "borderRadius": 12,
+      "borderRadiusLG": 12,
+      "borderRadiusSM": 10,
+      "lineWidth": 1,
+  
+      "boxShadow": "0 10px 30px rgba(52, 58, 64, 0.08)",
+      "boxShadowSecondary": "0 14px 40px rgba(52, 58, 64, 0.10)",
+  
+      "controlHeight": 38,
+      "controlHeightSM": 34,
+      "controlHeightLG": 44,
+  
+      "fontSize": 14,
+      "fontSizeSM": 12,
+      "fontSizeLG": 16,
+  
+      "lineHeight": 1.5,
+      "wireframe": false,
+  
+      "colorPrimaryBg": "#eef0ff",
+      "colorPrimaryBgHover": "#e3e7ff",
+      "colorPrimaryBgActive": "#d4dbf9",
+      "colorPrimaryBorder": "#b9c1fb",
+      "colorPrimaryBorderHover": "#9eabf8",
+      "colorPrimaryText": "#556ee6",
+      "colorPrimaryTextHover": "#485fda",
+      "colorPrimaryTextActive": "#3f54c8",
+  
+      "controlItemBgActive": "#d4dbf9",
+      "controlItemBgActiveHover": "#cdd5fb",
+      "controlItemBgHover": "#f2f4ff",
+  
+      "colorLink": "#556ee6",
+      "colorLinkHover": "#485fda",
+      "colorLinkActive": "#3f54c8",
+  
+      "colorTextLightSolid": "#ffffff"
+    },
+  
+    "components": {
+      "Layout": {
+        "bodyBg": "#f8f8fb",
+        "headerBg": "#ffffff",
+        "siderBg": "#ffffff",
+        "headerHeight": 56
+      },
+  
+      "Menu": {
+        "itemBg": "#ffffff",
+        "subMenuItemBg": "#ffffff",
+        "itemColor": "#6c757d",
+        "itemHoverColor": "#556ee6",
+        "itemSelectedColor": "#556ee6",
+        "itemHoverBg": "#eef0ff",
+        "itemSelectedBg": "#d4dbf9",
+        "itemActiveBg": "#d4dbf9",
+        "groupTitleColor": "#6c757d",
+        "iconSize": 18
+      },
+  
+      "Card": {
+        "colorBgContainer": "#ffffff",
+        "headerBg": "#ffffff",
+        "borderRadiusLG": 12,
+        "paddingLG": 16
+      },
+  
+      "Button": {
+        "borderRadius": 999,
+        "defaultShadow": "0 2px 6px rgba(52, 58, 64, 0.06)",
+        "primaryShadow": "0 6px 18px rgba(85, 110, 230, 0.28)",
+        "colorPrimaryHover": "#485fda",
+        "colorPrimaryActive": "#3f54c8"
+      },
+  
+      "Input": {
+        "borderRadius": 8,
+        "colorBgContainer": "#ffffff",
+        "colorBorder": "#e9ecef",
+        "hoverBorderColor": "#556ee6",
+        "activeBorderColor": "#556ee6",
+        "activeShadow": "0 0 0 3px rgba(85, 110, 230, 0.16)"
+      },
+  
+      "Select": {
+        "borderRadius": 8,
+        "colorBorder": "#e9ecef",
+        "optionSelectedBg": "#d4dbf9",
+        "optionActiveBg": "#eef0ff",
+        "optionSelectedColor": "#556ee6"
+      },
+  
+      "DatePicker": {
+        "borderRadius": 8,
+        "colorBorder": "#e9ecef",
+        "hoverBorderColor": "#556ee6",
+        "activeBorderColor": "#556ee6"
+      },
+  
+      "Tabs": {
+        "itemColor": "#6c757d",
+        "itemHoverColor": "#556ee6",
+        "itemSelectedColor": "#556ee6",
+        "inkBarColor": "#556ee6",
+        "titleFontSize": 14
+      },
+  
+      "Table": {
+        "headerBg": "#f8f8fb",
+        "headerColor": "#343a40",
+        "headerSplitColor": "#e9ecef",
+        "rowHoverBg": "#f8f8fb",
+        "borderColor": "#e9ecef",
+  
+        "rowSelectedBg": "#d4dbf9",
+        "rowSelectedHoverBg": "#cdd5fb"
+      },
+  
+      "Modal": {
+        "borderRadiusLG": 12,
+        "headerBg": "#f8f8fb",
+        "contentBg": "#ffffff",
+        "footerBg": "#ffffff",
+        "titleColor": "#343a40"
+      },
+  
+      "Dropdown": {
+        "colorBgElevated": "#ffffff",
+        "borderRadiusLG": 10,
+        "controlItemBgHover": "#f8f8fb"
+      },
+  
+      "Tooltip": {
+        "colorBgSpotlight": "#ffffff",
+        "borderRadius": 10,
+        "colorTextLightSolid": "#343a40"
+      },
+  
+      "Popover": {
+        "colorBgElevated": "#ffffff",
+        "borderRadiusLG": 12,
+        "titleColor": "#343a40"
+      },
+  
+      "Alert": {
+        "borderRadiusLG": 10,
+        "colorInfoBg": "#eef0ff",
+        "colorInfoBorder": "#556ee6",
+        "colorSuccessBg": "#eafaf3",
+        "colorSuccessBorder": "#34c38f",
+        "colorWarningBg": "#fff6e6",
+        "colorWarningBorder": "#f1b44c",
+        "colorErrorBg": "#ffecec",
+        "colorErrorBorder": "#f46a6a"
+      },
+  
+      "Tag": {
+        "borderRadiusSM": 8,
+        "defaultBg": "#f8f8fb",
+        "defaultColor": "#6c757d"
+      },
+  
+      "Breadcrumb": {
+        "itemColor": "#6c757d",
+        "linkColor": "#6c757d",
+        "lastItemColor": "#343a40"
+      },
+  
+      "Spin": {
+        "dotSize": 10,
+        "colorPrimary": "#556ee6"
+      },
+  
+      "Progress": {
+        "defaultColor": "#556ee6"
+      },
+  
+      "Switch": {
+        "colorPrimary": "#34c38f"
+      },
+  
+      "Checkbox": {
+        "colorPrimary": "#556ee6"
+      },
+  
+      "Radio": {
+        "colorPrimary": "#556ee6"
+      },
+  
+      "Divider": {
+        "colorSplit": "#e9ecef"
+      }
+    }
+  }
+  
